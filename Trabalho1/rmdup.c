@@ -199,5 +199,6 @@ int main(int argc, char *argv[])
 		}
 	
 	fclose(fp);
+	fclose(hardlinksfp);
 	return 0;
 }
