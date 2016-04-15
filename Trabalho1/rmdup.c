@@ -45,12 +45,14 @@ int equalFiles(struct Info info1,struct Info info2)
 int main(int argc, char *argv[])
 {
 	int fd;
+	FILE *hardlinksfp;
 	FILE *fp;
 	pid_t pid , pid2;
 	int duplication, duplication2;
 	char l1[101];
 	char l2[102];
 	char *symbol;
+	char dirhlinks[256];
 	struct Info info1;
 	struct Info info2;
 	
@@ -129,7 +131,9 @@ int main(int argc, char *argv[])
 	close(fd);	
 		
 	fp = fopen("files.txt" , "r");
-
+	sprintf(dirhlinks, "%s/%s", argv[1], "hlinks.txt");
+	
+	hardlinksfp=fopen(dirhlinks, "w");
 	
 	if(fp == NULL) 
 	{
@@ -181,6 +185,7 @@ int main(int argc, char *argv[])
 				{
 					unlink(info2.url);
 					link(info1.url, info2.url);
+					fprintf(hardlinksfp,"%s \n", info2.url);
 				}
 			}
 			else
