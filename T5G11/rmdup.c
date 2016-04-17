@@ -197,8 +197,7 @@ int main(int argc, char *argv[])
 				strcpy(info1.url, info2.url);
 			}
 		}
-	
-	fclose(fp);
 	fclose(hardlinksfp);
+	fclose(fp);
 	return 0;
 }
